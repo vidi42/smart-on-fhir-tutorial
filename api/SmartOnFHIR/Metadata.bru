@@ -1,0 +1,16 @@
+meta {
+  name: Metadata
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{_fhirServerUrl}}/metadata
+  body: none
+  auth: none
+}
+
+script:post-response {
+  bru.setEnvVar("authorize", res.body.rest[0].security.extension[0].extension[0].valueUri)
+  bru.setEnvVar("token", res.body.rest[0].security.extension[0].extension[1].valueUri)
+}

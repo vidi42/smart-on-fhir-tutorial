@@ -1,0 +1,80 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.2'
+	id 'io.spring.dependency-management' version '1.1.6'
+	id 'com.vaadin' version '24.4.9'
+	id 'com.diffplug.spotless' version '7.0.0.BETA2'
+}
+
+group = 'ro.vidi'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('vaadinVersion', "24.4.9")
+}
+
+spotless {
+	// optional: limit format enforcement to just the files changed by this feature branch
+	ratchetFrom 'origin/main'
+
+	format 'misc', {
+		// define the files to apply `misc` to
+		target '*.gradle', '.gitattributes', '.gitignore'
+
+		// define the steps to apply to those files
+		trimTrailingWhitespace()
+		indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+		endWithNewline()
+	}
+	java {
+		// don't need to set target, it is inferred from java
+		googleJavaFormat().aosp().reflowLongStrings().skipJavadocFormatting()
+		// fix formatting of type annotations
+		formatAnnotations()
+		// make sure every file has the following copyright header.
+		// optionally, Spotless can set copyright years by digging
+		// through git history (see "license" section below)
+		licenseHeader '/* (C)$YEAR */'
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.vaadin:vaadin-spring-boot-starter'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation group: 'ca.uhn.hapi.fhir', name: 'hapi-fhir-base', version: '7.4.0'
+	implementation group: 'ca.uhn.hapi.fhir', name: 'hapi-fhir-structures-r4', version: '7.4.0'
+	implementation group: 'ca.uhn.hapi.fhir', name: 'hapi-fhir-client', version: '7.4.0'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
