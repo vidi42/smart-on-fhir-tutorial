@@ -1,3 +1,4 @@
+/* (C)2024 */
 package ro.vidi.smart_on_fhir_tutorial.view;
 
 import com.vaadin.flow.component.Text;
@@ -12,14 +13,11 @@ public class HomeView extends VerticalLayout {
     public HomeView() {
 
         Button standaloneProviderLaunchFlow = new Button("Start Standalone Provider Launch Flow");
-        standaloneProviderLaunchFlow.addClickListener(event -> getUI().ifPresent(
-                ui -> ui.navigate("smart-start")));
+        standaloneProviderLaunchFlow.addClickListener(
+                event -> getUI().ifPresent(ui -> ui.navigate("smart-start")));
         add(
                 new H1("Welcome"),
                 new Text("This Sample application will guide you trough the SMART on FHIR flow."),
-                standaloneProviderLaunchFlow
-                );
-
+                standaloneProviderLaunchFlow);
     }
-
 }

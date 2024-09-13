@@ -93,8 +93,7 @@ public class SmartCallbackView extends VerticalLayout implements HasUrlParameter
 """));
 
         Button restartFlowButton = new Button("Restart");
-        restartFlowButton.addClickListener(
-                event -> getUI().ifPresent(ui -> ui.navigate("")));
+        restartFlowButton.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate("")));
 
         accessFhirInfo = new Button("Access FHIR Data");
         accessFhirInfo.setEnabled(false);
@@ -129,7 +128,9 @@ public class SmartCallbackView extends VerticalLayout implements HasUrlParameter
 
         add(
                 new H1("SMART Callback"),
-                new Text("Now that the authorization code was obtained, exchange it for an access token to be used when accessing the FHIR data."),
+                new Text(
+                        "Now that the authorization code was obtained, exchange it for an access"
+                                + " token to be used when accessing the FHIR data."),
                 authorizationCode,
                 encodedState,
                 getAccessTokenButton,
