@@ -72,12 +72,13 @@ public class FhirClientView extends VerticalLayout implements HasUrlParameter<St
         patientDetails.setReadOnly(true);
 
         Button restartFlowButton = new Button("Restart");
-        restartFlowButton.addClickListener(
-                event -> getUI().ifPresent(ui -> ui.navigate("")));
+        restartFlowButton.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate("")));
 
         add(
                 new H1("FHIR Client"),
-                new Text("Now that the Access Token was obtained, use it to read data from the FHIR server."),
+                new Text(
+                        "Now that the Access Token was obtained, use it to read data from the FHIR"
+                                + " server."),
                 accessToken,
                 patientId,
                 getPatientDetails,

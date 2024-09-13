@@ -172,7 +172,9 @@ public class SmartStartView extends VerticalLayout {
 
         add(
                 new H1("SMART Start"),
-                new Text("Configure the FHIR Server URL, discover the Auth URLs, then start the authorization flow."),
+                new Text(
+                        "Configure the FHIR Server URL, discover the Auth URLs, then start the"
+                                + " authorization flow."),
                 fhirServerUrlLayout,
                 discoverMetadataLayout,
                 metadataAccordion,
