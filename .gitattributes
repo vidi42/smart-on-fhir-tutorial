@@ -19,6 +19,14 @@
 ##   This will handle all files NOT defined below.
 * text=auto
 
+# Java sources
+*.java          text diff=java
+*.kt            text diff=kotlin
+*.groovy        text diff=java
+*.scala         text diff=java
+*.gradle        text diff=java
+*.gradle.kts    text diff=kotlin
+
 ## SOURCE CODE
 *.bat      text eol=crlf
 *.coffee   text
